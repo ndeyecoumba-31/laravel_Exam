@@ -10,14 +10,12 @@
 <!-- Content Row -->
 <div class="row">
 
-<div class="col-xl-8 col-lg-6">
+<div class="col-xl-8 col-lg-7 ">
+                      <div class="card shadow mb-3">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Graphique</h6>
 
-    <!-- Area Chart -->
-   
-    <div class="card shadow mb-3">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                                      <div>
+                                         <div>
                                             <canvas id="myChart"></canvas>
                                             <canvas id="formationChart"></canvas>
                                         </div>
@@ -68,13 +66,55 @@
                                                 }
                                                 
                                             });
-                                            </script>
-           </div>
-       
-    </div>
-   
+                                            
+                                            
+                          
+                                            const ctx1 = document.getElementById('formationChart');
 
-</div>
+                                            var formation_tranche = <?php echo $formation_tranche; ?>;
+                                            var labelformation = [], dataformation = [];
+                                            for (var i = 0; i < formation_tranche.length; i++) {
+                                                labelformation.push(formation_tranche[i].isStarted);
+                                                dataformation.push(formation_tranche[i].total);
+                                            }
+                                            new Chart(ctx1, {
+                                                type: 'bar',
+                                                data: {
+                                                labels: labelformation,
+                                                datasets: [{
+                                                    label: '# Statistique formation',
+                                                    data: dataformation,
+                                                    backgroundColor: [
+                                                    'rgba(31, 58, 147, 1)',
+                                                    'rgba(37, 116, 169, 1)',
+                                                    'rgba(92, 151, 191, 1)',
+                                                    'rgb(200, 247, 197)',
+                                                    'rgb(77, 175, 124)',
+                                                    'rgb(30, 130, 76)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(31, 58, 147, 1)',
+                                                        'rgba(37, 116, 169, 1)',
+                                                        'rgba(92, 151, 191, 1)',
+                                                        'rgb(200, 247, 197)',
+                                                        'rgb(77, 175, 124)',
+                                                        'rgb(30, 130, 76)'
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                                },
+                                                options: {
+                                                scales: {
+                                                    y: {
+                                                    beginAtZero: true
+                                                    }
+                                                }
+                                                }
+                                                
+                                            });
+                                       </script>
+                    </div>
+
 
 
 
